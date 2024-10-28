@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+// 복소수를 나타내는 Complex 클래스
+class Complex {
+private:
+    int real;  // 실수부
+    int img;   // 허수부
+
+public:
+    // 생성자: 실수부와 허수부를 초기화
+    Complex(int r = 0, int i = 0) : real(r), img(i) {
+        cout << "복소수 " << real << "+" << img << "j 생성\n";
+    }
+
+    // 복소수를 출력하는 함수
+    void show() const {
+        cout << real << "+" << img << "j\n";
+    }
+
+    // 두 개의 복소수를 더하는 전역 함수 선언 (friend로 선언하여 private 멤버 접근 허용)
+    friend Complex ComplexAdd(const Complex &c1, const Complex &c2);
+};
+
+// 두 개의 복소수를 더하는 전역 함수 정의
+Complex ComplexAdd(const Complex &c1, const Complex &c2) {
+    return Complex(c1.real + c2.real, c1.img + c2.img);  // 실수부와 허수부를 각각 더한 새로운 Complex 객체 반환
+}
+
+int main() {
+    // 복소수 객체 x, y, sum 생성
+    Complex x(2, 3), y(-5, 10), sum;
+
+    // 두 복소수의 합을 계산
+

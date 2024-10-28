@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+// 복소수를 나타내는 클래스
+class Complex {
+private:
+    int real;  // 실수부
+    int img;   // 허수부
+
+public:
+    // 생성자: 실수부와 허수부를 초기화
+    Complex(int r = 0, int i = 0) : real(r), img(i) {
+        cout << "복소수 " << real << "+" << img << "j 생성\n";
+    }
+
+    // 복소수를 출력하는 함수
+    void show() const {
+        cout << real << "+" << img << "j\n";
+    }
+
+    // ComplexManager 클래스가 private 멤버에 접근할 수 있도록 friend 선언
+    friend class ComplexManager;
+};
+
+// 복소수 연산을 관리하는 클래스
+class ComplexManager {
+public:
+    // 두 개의 복소수를 더하는 함수
+    Complex ComplexAdd(const Complex &c1, const Complex &c2) {
+        return Complex(c1.real + c2.real, c1.img + c2.img);
+    }
+
+    // 두 개의 복소수를 빼는 함수
+    Complex ComplexSub(const Complex &c1, const Complex &c2) {
+        return Complex(c1.real - c2.real, c1.img - c2.img);
+    }
+};
+
+int main() {
+    Complex x(5, 5), y(2, 2), sum, sub;  // 복소수 객체 생성
+    ComplexManager man;                  // 복소수 연산을 위한 매니저 객체 생성
+    
+    // 두 복소수의 합을 계산하고 출력
+    sum = man.ComplexAdd(x, y);
+    cout << "두 복소수의 합은 ";
+    sum.show();
+
+    // 두 복소수의 차를 계산하고 출력
+    sub = man.ComplexSub(x, y);
+    cout << "두 복소수의 차는 ";
+    sub.show();
+
+    return 0;
+}
+
