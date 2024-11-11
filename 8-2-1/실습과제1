@@ -1,0 +1,39 @@
+SmartTV 객체 htv가 생성될 때 자동으로 호출되는 생성자
+
+1.TV 클래스 생성자 호출
+SmartTV는 WideTV를 상속하고, WideTV는 TV를 상속하므로, 먼저 TV 클래스의 생성자가 호출됩니다.
+TV의 기본 생성자가 아닌, int size를 매개변수로 받는 생성자가 호출됩니다.
+TV(int size) { this->size = size; }                                                                                                                                                                                             2.WideTV 클래스 생성자 호출                                                                                     TV 클래스 생성이 완료된 후, WideTV 클래스의 생성자가 호출됩니다.                                                WideTV 생성자는 TV 클래스의 생성자를 호출하는 방식으로 size 값을 전달하고, 추가로 videoIn 멤버 변수를 초기화합니다.
+WideTV(int size, bool videoIn) : TV(size) { this->videoIn = videoIn; }
+
+3.SmartTV 클래스 생성자 호출
+마지막으로, SmartTV 클래스의 생성자가 호출됩니다.
+SmartTV 생성자는 ipAddr와 size를 인자로 받으며, videoIn 값은 기본적으로 true로 설정됩니다.
+SmartTV(string ipAddr, int size) : WideTV(size, true) {
+    this->ipAddr = ipAddr;
+}
+
+htv 생성시 지정된 인수가 각 생성자에 어떻게 전달되는지설명.
+
+ex)SmartTV htv("192.168.1.1", 50);이라면, "192.168.1.1"과 50이라는 인수가 생성자 호출에 전달됩니다.
+
+1. SmartTV 생성자 호출
+SmartTV 생성자의 역할은 ipAddr을 직접 초기화하고, WideTV 생성자를 호출하여 size와 videoIn의 값을 전달하는 것입니다.
+
+
+2. WideTV 생성자 호출
+WideTV 생성자는 TV 생성자를 호출하여 size를 전달하고, videoIn 멤버 변수를 초기화합니다.
+WideTV(int size, bool videoIn) : TV(size) {
+    this->videoIn = videoIn;
+}
+TV 생성자에 size = 50을 전달하여 초기화합니다.
+videoIn 멤버 변수는 this->videoIn = videoIn;로 초기화합니다.
+
+
+3. TV 생성자 호출
+TV 생성자는 전달받은 size 값을 멤버 변수로 설정합니다.
+TV(int size) {
+    this->size = size;
+}
+
+size 멤버 변수는 this->size = size;로 초기화합니다.
